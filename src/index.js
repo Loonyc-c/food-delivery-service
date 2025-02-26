@@ -16,6 +16,8 @@ app.use("/service",(req,res)=>{
 })
 
 app.use("/auth",authRouter)
+// app.post("/auth/sign-up",authRouter
+// )
 
 
 app.listen(port,()=>{
