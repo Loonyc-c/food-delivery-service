@@ -4,7 +4,9 @@ const usersSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }, 
     phoneNumber:{type:String},
-    location:{type:String},
+    adress:{type:String},
+    role:{type:String, enum: ["ADMIN","USER"],default:"USER"}
+
 })
 
 export const Users = mongoose.model("users",usersSchema)

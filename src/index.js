@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { connectDb } from "./mongo-connection.js"
 import { authRouter } from "./routers/auth-router.js"
+import { foodRouter } from "./routers/food.routes.js"
 
 const app = express()
 app.use(cors())
@@ -16,8 +17,7 @@ app.use("/service",(req,res)=>{
 })
 
 app.use("/auth",authRouter)
-// app.post("/auth/sign-up",authRouter
-// )
+app.use("/foods",foodRouter)
 
 
 app.listen(port,()=>{
