@@ -1,5 +1,5 @@
 import express from 'express'
-import getFoodById from '../controllers/food.controller/getfood.controller.js'
+import getFoodById from '../controllers/food.controller/getFoodById.controller.js'
 import createFood from '../controllers/food.controller/createFood.controller.js'
 import deleteFoodById from '../controllers/food.controller/deleteFood.controller.js'
 import getAllFoods from '../controllers/food.controller/getAllFood.controller.js'
