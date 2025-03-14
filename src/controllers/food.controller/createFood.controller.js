@@ -1,8 +1,21 @@
 import { FoodsModel } from "../../schemas/food.schema.js"
 import mongoose from "mongoose";
+import multer from "multer";
+
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+    cloud_name: "ddeq6vbyn",
+    secure: true,
+    api_key: "277486782371414",
+    api_secret: "nm-Fw5JrKGIHdMdwxQLjjZDecpk",
+});
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const createFood = async (req, res) => {
-    const { foodName, price, image, ingredients, category } = req.body
+    const { foodName, price, ingredients, category } = req.body
+
     try {
         if (!mongoose.Types.ObjectId.isValid(category)) {
             return res.status(400).json({ message: "Invalid category ID" });
@@ -16,10 +29,25 @@ const createFood = async (req, res) => {
             });
         }
 
+        let imageUrl = "";
+        if (req.file) {
+            const result = await cloudinary.uploader.upload_stream(
+                { folder: "foods" },
+                (error, result) => {
+                    if (error) {
+                        return res.status(500).json({ message: "Image upload failed" });
+                    }
+                    imageUrl = result.secure_url;
+                }
+            );
+            req.file.stream.pipe(result);
+        }
+
+
         const createdFood = await FoodsModel.create({
             foodName,
             price,
-            image,
+            image:imageUrl,
             ingredients,
             category
         });
