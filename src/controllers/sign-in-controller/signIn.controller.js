@@ -29,7 +29,8 @@ const SignInController = async (req, res) => {
 
         const token = jwt.sign(
             { userId: user._id, email: user.email,role:user.role },
-            decodePassword
+            decodePassword,
+            { expiresIn: "2 days" }
         );
 
         return res.status(200).json({
