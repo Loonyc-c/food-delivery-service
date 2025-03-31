@@ -9,7 +9,7 @@ const updateFoodById = async (req, res) => {
     const { foodName, price, ingredients, category, image } = req.body;
 
     const updatedFood = await FoodsModel.findByIdAndUpdate(req.params.id, {
-      foodName,
+      foodName ,
       price,
       ingredients,
       category,
