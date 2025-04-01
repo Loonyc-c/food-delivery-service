@@ -1,24 +1,24 @@
+import { FoodOrderItemsModel } from "../../schemas/foodOrderItem.schema.js";
 import { FoodOrderModel } from "../../schemas/foodOrder.schema.js";
 
-const createFoodOrder = async (req, res) => {
-  const { user, totalPrice, foodOrderItems } = req.body;
-
+export const createFoodOrder = async (req, res) => {
   try {
-    const newOrder = await FoodOrderModel.create({
+    const { user, totalPrice, foodOrderItems } = req.body;
+
+    if (!user || !totalPrice || !foodOrderItems.length) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const createdItems = await FoodOrderItemsModel.insertMany(foodOrderItems);
+
+    const foodOrder = await FoodOrderModel.create({
       user,
       totalPrice,
-      foodOrderItems,
+      foodOrderItems: createdItems.map((item) => item._id),
     });
-    res.status(201).json({
-      message: "Successfully ordered",
-      order: newOrder,
-    });
+
+    res.status(201).json(foodOrder);
   } catch (error) {
-    console.log("error:", error);
-    res.status(500).json({
-      message: "error occured at creating food order",
-    });
+    res.status(500).json({ message: error.message });
   }
 };
-
-export default createFoodOrder;
