@@ -5,6 +5,8 @@ export const createFoodOrder = async (req, res) => {
   try {
     const { user, totalPrice, foodOrderItems } = req.body;
 
+    console.log(req.body);
+
     if (!user || !totalPrice || !foodOrderItems.length) {
       return res.status(400).json({ message: "Missing required fields" });
     }

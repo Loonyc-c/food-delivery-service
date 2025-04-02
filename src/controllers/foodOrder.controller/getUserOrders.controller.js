@@ -12,6 +12,7 @@ export const getUserOrders = async (req, res) => {
       .populate("foodOrderItems")
       .populate("user");
 
+    console.log(orders);
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -2,14 +2,14 @@ import { FoodOrderItemsModel } from "../../schemas/foodOrderItem.schema.js";
 
 export const createFoodOrderItem = async (req, res) => {
   try {
-    const { foodName, quantity } = req.body;
+    const { food, quantity } = req.body;
 
-    if (!foodName || !quantity) {
+    if (!food || !quantity) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     const foodOrderItem = await FoodOrderItemsModel.create({
-      foodName,
+      food,
       quantity,
     });
 
