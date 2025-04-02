@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const foodOrderItemSchema = new mongoose.Schema({
-  food: { type: mongoose.Types.ObjectId, ref: "foods" },
+  food: { type: mongoose.Types.ObjectId, ref: "foods", required: true },
   quantity: { type: Number, required: true },
 });
 
