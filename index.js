@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import { connectDb } from "./mongo-connection.js";
-import { authRouter } from "./routers/auth-router.js";
-import { foodRouter } from "./routers/food.routes.js";
-import { categoriesRouter } from "./routers/categories.routes.js";
-import { userRouter } from "./routers/user.router.js";
-import { orderRouter } from "./routers/foodOrder.routes.js";
-import orderItemRouter from "./routers/foodOrderItem.routes.js";
+import { connectDb } from "./src/mongo-connection.js";
+import { authRouter } from "./src/routers/auth-router.js";
+import { foodRouter } from "./src/routers/food.routes.js";
+import { categoriesRouter } from "./src/routers/categories.routes.js";
+import { userRouter } from "./src/routers/user.router.js";
+import { orderRouter } from "./src/routers/foodOrder.routes.js";
+import orderItemRouter from "./src/routers/foodOrderItem.routes.js";
 
 const app = express();
 app.use(cors());
